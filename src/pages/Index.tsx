@@ -10,18 +10,18 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 interface Skin {
   id: number;
   name: string;
-  price: number;
   image: string;
   rating: number;
   downloads: number;
   tags: string[];
   reviews: number;
+  category: string;
 }
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState<number[]>([]);
-  const [cart, setCart] = useState<number[]>([]);
+  const [downloaded, setDownloaded] = useState<number[]>([]);
   const [activeTab, setActiveTab] = useState('popular');
   const [selectedSkin, setSelectedSkin] = useState<Skin | null>(null);
 
@@ -29,62 +29,62 @@ const Index = () => {
     {
       id: 1,
       name: 'Легендарный Стив',
-      price: 299,
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
       rating: 4.8,
       downloads: 15420,
       tags: ['популярное', 'классика', 'новичкам'],
-      reviews: 342
+      reviews: 342,
+      category: 'Классика'
     },
     {
       id: 2,
       name: 'Алекс Воин',
-      price: 399,
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/a4a03380-f036-43a8-ab1e-52bfe1176fac.jpg',
       rating: 4.9,
       downloads: 12350,
       tags: ['эпик', 'воин', 'топ'],
-      reviews: 289
+      reviews: 289,
+      category: 'Воины'
     },
     {
       id: 3,
       name: 'Крипер Эдишн',
-      price: 499,
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/518c351c-c15e-45bf-ad53-96b5894d957a.jpg',
       rating: 4.7,
       downloads: 9870,
       tags: ['монстр', 'редкое', 'крипер'],
-      reviews: 198
+      reviews: 198,
+      category: 'Монстры'
     },
     {
       id: 4,
       name: 'Алмазный Рыцарь',
-      price: 599,
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
       rating: 5.0,
       downloads: 18200,
       tags: ['премиум', 'алмаз', 'рыцарь'],
-      reviews: 567
+      reviews: 567,
+      category: 'Премиум'
     },
     {
       id: 5,
       name: 'Огненный Маг',
-      price: 449,
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/a4a03380-f036-43a8-ab1e-52bfe1176fac.jpg',
       rating: 4.6,
       downloads: 7654,
       tags: ['маг', 'огонь', 'магия'],
-      reviews: 145
+      reviews: 145,
+      category: 'Магия'
     },
     {
       id: 6,
       name: 'Эндермен Про',
-      price: 549,
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/518c351c-c15e-45bf-ad53-96b5894d957a.jpg',
       rating: 4.9,
       downloads: 11230,
       tags: ['эндер', 'темное', 'мистика'],
-      reviews: 276
+      reviews: 276,
+      category: 'Темные'
     }
   ];
 
@@ -94,10 +94,14 @@ const Index = () => {
     );
   };
 
-  const toggleCart = (id: number) => {
-    setCart(prev => 
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
+  const handleDownload = (skin: Skin) => {
+    setDownloaded(prev => [...prev, skin.id]);
+    const element = document.createElement('a');
+    element.href = skin.image;
+    element.download = `${skin.name}.png`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   const filteredSkins = skins.filter(skin =>
@@ -110,8 +114,7 @@ const Index = () => {
 
   const displaySkins = activeTab === 'popular' ? popularSkins : 
                        activeTab === 'catalog' ? filteredSkins :
-                       activeTab === 'favorites' ? filteredSkins.filter(s => favorites.includes(s.id)) :
-                       filteredSkins.filter(s => cart.includes(s.id));
+                       filteredSkins.filter(s => favorites.includes(s.id));
 
   return (
     <div className="min-h-screen bg-background">
@@ -136,19 +139,10 @@ const Index = () => {
                   </span>
                 )}
               </Button>
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="relative hover:glow-primary"
-                onClick={() => setActiveTab('cart')}
-              >
-                <Icon name="ShoppingCart" className={cart.length > 0 ? 'fill-primary text-primary' : ''} />
-                {cart.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                    {cart.length}
-                  </span>
-                )}
-              </Button>
+              <div className="flex items-center gap-2 px-3 py-2 bg-card/50 rounded-lg border border-border">
+                <Icon name="Download" className="text-primary" size={20} />
+                <span className="text-sm font-bold">{downloaded.length} скачано</span>
+              </div>
               <Button variant="outline" size="icon" className="hover:glow-secondary">
                 <Icon name="User" />
               </Button>
@@ -169,7 +163,7 @@ const Index = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8 bg-card border border-border">
+          <TabsList className="grid w-full grid-cols-3 mb-8 bg-card border border-border">
             <TabsTrigger value="popular" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               <Icon name="TrendingUp" className="mr-2" size={18} />
               Популярное
@@ -182,21 +176,15 @@ const Index = () => {
               <Icon name="Heart" className="mr-2" size={18} />
               Избранное
             </TabsTrigger>
-            <TabsTrigger value="cart" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              <Icon name="ShoppingCart" className="mr-2" size={18} />
-              Корзина
-            </TabsTrigger>
           </TabsList>
 
-          {['popular', 'catalog', 'favorites', 'cart'].map(tab => (
+          {['popular', 'catalog', 'favorites'].map(tab => (
             <TabsContent key={tab} value={tab}>
               {displaySkins.length === 0 ? (
                 <div className="text-center py-16">
                   <div className="text-6xl mb-4">📦</div>
                   <p className="text-muted-foreground text-lg">
-                    {tab === 'favorites' ? 'Нет избранных скинов' : 
-                     tab === 'cart' ? 'Корзина пуста' : 
-                     'Скины не найдены'}
+                    {tab === 'favorites' ? 'Нет избранных скинов' : 'Скины не найдены'}
                   </p>
                 </div>
               ) : (
@@ -283,21 +271,26 @@ const Index = () => {
                                       ))}
                                     </div>
                                   </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-2">Категория</p>
+                                    <Badge variant="outline" className="pixel-corners text-base">{skin.category}</Badge>
+                                  </div>
                                   <div className="pt-4">
-                                    <div className="text-3xl font-bold text-primary mb-4">{skin.price} ₽</div>
                                     <Button 
                                       className="w-full pixel-corners glow-primary"
-                                      onClick={() => toggleCart(skin.id)}
+                                      size="lg"
+                                      onClick={() => handleDownload(skin)}
+                                      disabled={downloaded.includes(skin.id)}
                                     >
-                                      {cart.includes(skin.id) ? (
+                                      {downloaded.includes(skin.id) ? (
                                         <>
                                           <Icon name="Check" className="mr-2" />
-                                          В корзине
+                                          Скачано
                                         </>
                                       ) : (
                                         <>
-                                          <Icon name="ShoppingCart" className="mr-2" />
-                                          Купить скин
+                                          <Icon name="Download" className="mr-2" />
+                                          Скачать скин
                                         </>
                                       )}
                                     </Button>
@@ -333,23 +326,22 @@ const Index = () => {
                             </div>
                           </div>
                         </CardContent>
-                        <CardFooter className="p-4 pt-0 flex items-center justify-between">
-                          <div className="text-2xl font-bold text-primary">{skin.price} ₽</div>
+                        <CardFooter className="p-4 pt-0">
                           <Button 
-                            size="sm"
-                            className="pixel-corners"
-                            variant={cart.includes(skin.id) ? "secondary" : "default"}
-                            onClick={() => toggleCart(skin.id)}
+                            className="w-full pixel-corners"
+                            variant={downloaded.includes(skin.id) ? "secondary" : "default"}
+                            onClick={() => handleDownload(skin)}
+                            disabled={downloaded.includes(skin.id)}
                           >
-                            {cart.includes(skin.id) ? (
+                            {downloaded.includes(skin.id) ? (
                               <>
-                                <Icon name="Check" size={16} className="mr-1" />
-                                В корзине
+                                <Icon name="Check" size={16} className="mr-2" />
+                                Скачано
                               </>
                             ) : (
                               <>
-                                <Icon name="ShoppingCart" size={16} className="mr-1" />
-                                Купить
+                                <Icon name="Download" size={16} className="mr-2" />
+                                Скачать
                               </>
                             )}
                           </Button>
@@ -358,20 +350,7 @@ const Index = () => {
                     ))}
                   </div>
 
-                  {tab === 'cart' && cart.length > 0 && (
-                    <div className="mt-8 p-6 bg-card border-2 border-primary pixel-corners glow-primary">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-2xl font-bold">Итого</h3>
-                        <div className="text-3xl font-bold text-primary">
-                          {skins.filter(s => cart.includes(s.id)).reduce((sum, s) => sum + s.price, 0)} ₽
-                        </div>
-                      </div>
-                      <Button className="w-full pixel-corners glow-primary" size="lg">
-                        <Icon name="CreditCard" className="mr-2" />
-                        Оформить заказ
-                      </Button>
-                    </div>
-                  )}
+
                 </>
               )}
             </TabsContent>
