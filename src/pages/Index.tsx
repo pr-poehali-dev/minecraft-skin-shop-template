@@ -31,9 +31,9 @@ const Index = () => {
       name: 'Легендарный Стив',
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
       rating: 4.8,
-      downloads: 15420,
+      downloads: 25420,
       tags: ['популярное', 'классика', 'новичкам'],
-      reviews: 342,
+      reviews: 542,
       category: 'Классика'
     },
     {
@@ -41,9 +41,9 @@ const Index = () => {
       name: 'Алекс Воин',
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/a4a03380-f036-43a8-ab1e-52bfe1176fac.jpg',
       rating: 4.9,
-      downloads: 12350,
+      downloads: 19350,
       tags: ['эпик', 'воин', 'топ'],
-      reviews: 289,
+      reviews: 389,
       category: 'Воины'
     },
     {
@@ -51,9 +51,9 @@ const Index = () => {
       name: 'Крипер Эдишн',
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/518c351c-c15e-45bf-ad53-96b5894d957a.jpg',
       rating: 4.7,
-      downloads: 9870,
-      tags: ['монстр', 'редкое', 'крипер'],
-      reviews: 198,
+      downloads: 16870,
+      tags: ['монстр', 'популярное', 'крипер'],
+      reviews: 298,
       category: 'Монстры'
     },
     {
@@ -61,9 +61,9 @@ const Index = () => {
       name: 'Алмазный Рыцарь',
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
       rating: 5.0,
-      downloads: 18200,
+      downloads: 22200,
       tags: ['премиум', 'алмаз', 'рыцарь'],
-      reviews: 567,
+      reviews: 667,
       category: 'Премиум'
     },
     {
@@ -71,9 +71,9 @@ const Index = () => {
       name: 'Огненный Маг',
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/a4a03380-f036-43a8-ab1e-52bfe1176fac.jpg',
       rating: 4.6,
-      downloads: 7654,
+      downloads: 14654,
       tags: ['маг', 'огонь', 'магия'],
-      reviews: 145,
+      reviews: 245,
       category: 'Магия'
     },
     {
@@ -81,10 +81,130 @@ const Index = () => {
       name: 'Эндермен Про',
       image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/518c351c-c15e-45bf-ad53-96b5894d957a.jpg',
       rating: 4.9,
-      downloads: 11230,
-      tags: ['эндер', 'темное', 'мистика'],
-      reviews: 276,
+      downloads: 18230,
+      tags: ['эндер', 'темное', 'популярное'],
+      reviews: 376,
       category: 'Темные'
+    },
+    {
+      id: 7,
+      name: 'Зомби Выживший',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/d5b2bf04-8f33-4b7a-80b2-3c3786818e91.jpg',
+      rating: 4.5,
+      downloads: 13120,
+      tags: ['зомби', 'хоррор', 'мобы'],
+      reviews: 187,
+      category: 'Монстры'
+    },
+    {
+      id: 8,
+      name: 'Ниндзя Тень',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/f9c9d97f-31bd-4bd7-a107-e47baad5b065.jpg',
+      rating: 4.9,
+      downloads: 20100,
+      tags: ['ниндзя', 'популярное', 'стелс'],
+      reviews: 456,
+      category: 'Воины'
+    },
+    {
+      id: 9,
+      name: 'Космонавт',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/ade6a34f-d83c-48e5-803a-d2b3435b6a56.jpg',
+      rating: 4.8,
+      downloads: 17890,
+      tags: ['космос', 'эпик', 'уникальное'],
+      reviews: 334,
+      category: 'Космос'
+    },
+    {
+      id: 10,
+      name: 'Скелет Лучник',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/518c351c-c15e-45bf-ad53-96b5894d957a.jpg',
+      rating: 4.4,
+      downloads: 11560,
+      tags: ['скелет', 'лучник', 'мобы'],
+      reviews: 156,
+      category: 'Монстры'
+    },
+    {
+      id: 11,
+      name: 'Железный Голем',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
+      rating: 4.7,
+      downloads: 15340,
+      tags: ['голем', 'защитник', 'мощный'],
+      reviews: 289,
+      category: 'Защитники'
+    },
+    {
+      id: 12,
+      name: 'Пиратский Капитан',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/a4a03380-f036-43a8-ab1e-52bfe1176fac.jpg',
+      rating: 4.6,
+      downloads: 12780,
+      tags: ['пират', 'море', 'приключения'],
+      reviews: 198,
+      category: 'Пираты'
+    },
+    {
+      id: 13,
+      name: 'Драконий Воин',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/f9c9d97f-31bd-4bd7-a107-e47baad5b065.jpg',
+      rating: 5.0,
+      downloads: 24500,
+      tags: ['дракон', 'популярное', 'эпик'],
+      reviews: 678,
+      category: 'Премиум'
+    },
+    {
+      id: 14,
+      name: 'Ведьма Лесная',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/a4a03380-f036-43a8-ab1e-52bfe1176fac.jpg',
+      rating: 4.5,
+      downloads: 10230,
+      tags: ['ведьма', 'магия', 'мистика'],
+      reviews: 145,
+      category: 'Магия'
+    },
+    {
+      id: 15,
+      name: 'Рыцарь Света',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
+      rating: 4.8,
+      downloads: 16450,
+      tags: ['рыцарь', 'святой', 'популярное'],
+      reviews: 312,
+      category: 'Воины'
+    },
+    {
+      id: 16,
+      name: 'Демон Ада',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/518c351c-c15e-45bf-ad53-96b5894d957a.jpg',
+      rating: 4.9,
+      downloads: 19870,
+      tags: ['демон', 'ад', 'темное'],
+      reviews: 445,
+      category: 'Темные'
+    },
+    {
+      id: 17,
+      name: 'Самурай Чести',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/f9c9d97f-31bd-4bd7-a107-e47baad5b065.jpg',
+      rating: 4.9,
+      downloads: 21340,
+      tags: ['самурай', 'популярное', 'япония'],
+      reviews: 489,
+      category: 'Воины'
+    },
+    {
+      id: 18,
+      name: 'Король Майнкрафта',
+      image: 'https://cdn.poehali.dev/projects/37b9b65e-8fb2-4320-88bb-793024bdfd30/files/646f47b0-4d23-4c58-86c2-1722ee4b597c.jpg',
+      rating: 5.0,
+      downloads: 28900,
+      tags: ['король', 'корона', 'премиум'],
+      reviews: 756,
+      category: 'Премиум'
     }
   ];
 
